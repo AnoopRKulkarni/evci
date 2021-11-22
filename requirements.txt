@@ -4,5 +4,6 @@ geopandas
 pandas
 numpy
 matplotlib
-shapely streamlit
+shapely 
+streamlit
 scipy
