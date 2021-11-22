@@ -318,7 +318,7 @@ def app(site):
    # peak vehicles through crowded junctions in a day ~ 1.5L
    
    peak_traffic = {}
-   peak_traffic['pune'] = [
+   peak_traffic['pmc'] = [
             4826, 4826, 5228, 5228, 5228, 5630, 6434, 6836, 6836, 
             6434, 6032, 6032, 6032, 6032, 6434, 6836, 7239, 8043, 
             8043, 8043, 6836, 6032, 5630, 5228       
@@ -443,17 +443,8 @@ def app(site):
          initial_output_df = output_df.copy()
          #st.write(output_df.head())
          
-         #@title Sites marked with assumed traffic congestion
-         base = grid_df.plot(color='none', edgecolor='grey', alpha=0.4)
-         df.plot(ax=base, color='none', edgecolor='black')
-         
-         tmp_df = gpd.GeoDataFrame(s_u_df)
-         tmp_df.plot(ax=base, column='Traffic congestion', cmap='jet', markersize=50, legend=True) 
-         
-         plt.tight_layout()
-         st.pyplot()
-         
          #@title Sites marked with utilization
+         st.subheader("Utilization Histograms")
          base = grid_df.plot(color='none', edgecolor='grey', alpha=0.4) 
          df.plot(ax=base, color='none', edgecolor='black')
          

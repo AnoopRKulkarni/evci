@@ -84,7 +84,7 @@ def app(site):
                                     geometry=data[s]['geometry'])
     
     #@title Show map layers
-    base = grid_df.plot(color='none', edgecolor='grey', alpha=0.4, figsize=(12,8))
+    base = grid_df.plot(color='none', edgecolor='grey', alpha=0.4, figsize=(14,8))
     df.plot(ax=base, color='none', edgecolor='black')
     
     excel_sheets = list(set(sel_datasheets) & set(datasheets))
