@@ -400,6 +400,7 @@ def app(site):
          u_df = run_analysis(backoff_factor=backoff_factor)      
          
          #@title Plot utilization histogram
+         st.subheader("Utilization Histograms")
          fig, ax = plt.subplots(1,2, figsize=(8,3))
          ax[0].set_xlabel('Utilization')
          ax[1].set_xlabel('Unserviced')
@@ -444,7 +445,7 @@ def app(site):
          #st.write(output_df.head())
          
          #@title Sites marked with utilization
-         st.subheader("Utilization Histograms")
+         st.subheader("Site Utilization")
          base = grid_df.plot(color='none', edgecolor='grey', alpha=0.4) 
          df.plot(ax=base, color='none', edgecolor='black')
          
