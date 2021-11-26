@@ -73,9 +73,13 @@ def app(site):
     cell = gpd.GeoDataFrame(grid_cells, columns=['geometry'], crs=crs)
     
     #@title Create dataframes
-    st.sidebar.subheader(f'Approx grid cell size: {cell_size*1000*1000:.2f} sq-m')
-    
     grid_df = gpd.overlay(df, cell, how='intersection')
+    
+    cell_area = grid_df.loc[100]['geometry'].area
+    if cell_area < 1:
+       st.sidebar.subheader(f'Approx grid cell size: {cell_area*1000*1000:.2f} sq-m')
+    else:
+       st.sidebar.subheader(f'Approx grid cell size: {cell_area:.2f} sq-km')
     
     data_df = {}
     
