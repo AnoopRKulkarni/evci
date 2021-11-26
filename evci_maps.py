@@ -75,9 +75,9 @@ def app(site):
     #@title Create dataframes
     grid_df = gpd.overlay(df, cell, how='intersection')
     
-    cell_area = grid_cells[0].area
+    cell_area = area/grid_df.shape[0]
     if cell_area < 1:
-       st.sidebar.subheader(f'Approx grid cell size: {cell_area*1e6:.2f} sq-m')
+       st.sidebar.subheader(f'Approx grid cell size: {cell_area*1e3:.2f} sq-m')
     else:
        st.sidebar.subheader(f'Approx grid cell size: {cell_area:.2f} sq-km')
     
