@@ -391,7 +391,7 @@ def app(site):
    
    backoff_factor = st.sidebar.slider('Backoff factor', 1,5,2,1)
    clustering_cutoff = st.sidebar.slider('Clustering cutoff', 0.,0.1,0.01,0.01)
-   
+
    with st.form("initial_analysis_form"):
       st.header("Initial Analysis")
       st.markdown("Please select the parameters from the left selection panel and then click the button **'Run Analysis'**")
@@ -539,14 +539,34 @@ def app(site):
             st.header("Margin")
             st.subheader(f'{sum(u_df.margin)/1e7:.2f} Cr Rs')
          
-         #@title Prepare output
-         output_df = s_df.copy()
-         output_df.drop('geometry', axis=1, inplace=True)
-         output_df.head()
+         #@title Prepare data
+         s_u_df = s_df.copy()
+         
+         s_u_df['utilization'] = u_df.utilization
+         s_u_df['unserviced'] = u_df.unserviced
+         s_u_df['capex'] = u_df.capex
+         s_u_df['opex'] = u_df.opex
+         s_u_df['margin'] = u_df.margin
+         s_u_df['max vehicles'] = u_df['max vehicles']
+         s_u_df['estimated vehicles'] = u_df['estimated vehicles']
          
          #@title Save final analysis to Excel
+         output_df = s_u_df.copy()
+         output_df.drop('geometry', axis=1, inplace=True)
          output_df.to_excel(OUTPUT_PATH + 'final_output.xlsx')
          final_output_df = output_df.copy()
+         #st.write(output_df.head())
+
+         #@title Sites marked with utilization
+         st.subheader("Site Utilization")
+         base = grid_df.plot(color='none', edgecolor='grey', alpha=0.4) 
+         df.plot(ax=base, color='none', edgecolor='black')
+         
+         tmp_df = gpd.GeoDataFrame(s_u_df)
+         tmp_df.plot(ax=base, column='utilization', cmap='jet', markersize=50, legend=True) 
+             
+         plt.tight_layout()
+         st.pyplot()
 
    if 'initial_output_df' in globals():
       file_path = OUTPUT_PATH + 'initial_output.xlsx'
