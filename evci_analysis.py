@@ -436,7 +436,6 @@ def app(site):
          s_u_df['max vehicles'] = u_df['max vehicles']
          s_u_df['estimated vehicles'] = u_df['estimated vehicles']
          
-         
          #@title Save initial analysis to Excel
          output_df = s_u_df.copy()
          output_df.drop('geometry', axis=1, inplace=True)
@@ -444,17 +443,21 @@ def app(site):
          initial_output_df = output_df.copy()
          #st.write(output_df.head())
          
-         #@title Sites marked with utilization
-         st.subheader("Site Utilization")
+         #@title Sites marked with utilization and traffic congestion
          base = grid_df.plot(color='none', edgecolor='grey', alpha=0.4) 
-         df.plot(ax=base, color='none', edgecolor='black')
-         
          tmp_df = gpd.GeoDataFrame(s_u_df)
+         st.subheader("Site Utilization")
+         df.plot(ax=base, color='none', edgecolor='black')
          tmp_df.plot(ax=base, column='utilization', cmap='jet', markersize=50, legend=True) 
-             
          plt.tight_layout()
          st.pyplot()
 
+         base = grid_df.plot(color='none', edgecolor='grey', alpha=0.4) 
+         tmp_df = gpd.GeoDataFrame(s_u_df)
+         st.subheader("Traffic Congestion")
+         df.plot(ax=base, color='none', edgecolor='black')
+         tmp_df.plot(ax=base, column='Traffic congestion', cmap='jet', markersize=50, legend=True)
+         st.pyplot()
    # ## Threholding and Clustering
    # 
    # Using hierarchical clustering
@@ -561,12 +564,19 @@ def app(site):
          st.subheader("Site Utilization")
          base = grid_df.plot(color='none', edgecolor='grey', alpha=0.4) 
          df.plot(ax=base, color='none', edgecolor='black')
-         
          tmp_df = gpd.GeoDataFrame(s_u_df)
          tmp_df.plot(ax=base, column='utilization', cmap='jet', markersize=50, legend=True) 
-             
          plt.tight_layout()
          st.pyplot()
+
+         st.subheader("Traffic Congestion")
+         base = grid_df.plot(color='none', edgecolor='grey', alpha=0.4) 
+         df.plot(ax=base, color='none', edgecolor='black')
+         tmp_df = gpd.GeoDataFrame(s_u_df)
+         tmp_df.plot(ax=base, column='Traffic congestion', cmap='jet', markersize=50, legend=True) 
+         plt.tight_layout()
+         st.pyplot()
+
 
    if 'initial_output_df' in globals():
       file_path = OUTPUT_PATH + 'initial_output.xlsx'
