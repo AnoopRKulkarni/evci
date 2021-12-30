@@ -5,7 +5,8 @@ import streamlit as st
 
 sites = {}
 sites['PCMC'] = {'prefix':'pcmc', 'file': 'PCMC Mastersheet_3Nov21.xlsx', 'gis':'PCMC_Wards'}
-sites['Pune'] = {'prefix':'pmc', 'file': 'Pune site mastersheet_3Nov21.xlsx', 'gis':'pune-admin-wards'}
+#sites['Pune'] = {'prefix':'pmc', 'file': 'Pune site mastersheet_3Nov21.xlsx', 'gis':'pune-admin-wards'}
+sites['Pune'] = {'prefix':'pmc', 'file': 'Pune site mastersheet_3Nov21.xlsx', 'gis':'PMC'}
 sites['Goa']  = {'prefix':'goa', 'file': 'Master sheet_EVCI Locations_29Sep21_Final.xlsx', 'gis':'Goa'}
 
 PAGES = {
