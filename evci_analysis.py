@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# EVCI Analysis
-# 
-# 
-# ## MP ENSYSTEMS
+#
+# MPEN EVCI Tool Analysis Page
+# Authors: Anoop R Kulkarni
+# Version 4.0
+# Mar 14, 2022
 
 #@title Import libraries
 import geopandas as gpd
@@ -22,6 +23,8 @@ from scipy.cluster.hierarchy import dendrogram, linkage
 from scipy.cluster.hierarchy import fcluster
 
 import streamlit as st
+import extra_streamlit_components as stx
+
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 def app(site):
@@ -29,10 +32,19 @@ def app(site):
    global backoff_factor
    global initial_output_df, final_output_df
 
+   cookie_manager = stx.CookieManager()
+   if cookie_manager.get(cookie='mpen_evci_user') != None:
+      username = cookies.get(cookie='mpen_evci_user')
+
    #@title Define file paths
-   INPUT_PATH = 'input/'+site['prefix']+'/'
-   OUTPUT_PATH = 'output/'+site['prefix']+'/'
-      
+   INPUT_PATH = 'input/'+username+'/'+site['prefix']+'/'
+   OUTPUT_PATH = 'output/'+username+'/'+site['prefix']+'/'
+    
+   if not os.path.exists(INPUT_PATH):
+      os.makedirs(INPUT_PATH)
+   if not os.path.exists(OUTPUT_PATH):
+      os.makedirs(OUTPUT_PATH)
+    
    #@title Read Master Data Excel Book
    newdata = pd.read_excel(INPUT_PATH + site['file'], sheet_name=None)
    datasheets = list(newdata.keys())
