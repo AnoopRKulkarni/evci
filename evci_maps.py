@@ -95,8 +95,7 @@ def app(site):
     for s in excel_sheets:
       data_df[s].plot(ax=base, markersize=50, legend=True, label=s) 
     
-    #plt.legend(bbox_to_anchor=(1,0), loc="upper left")
-    plt.legend()
+    plt.legend(bbox_to_anchor=(1,1), loc="upper left")
     plt.xlabel('Longitude')
     plt.ylabel('Latitude')
     

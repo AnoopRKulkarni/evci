@@ -382,8 +382,7 @@ def app(site):
    plt.plot(peak_traffic,label='Peak Traffic Volume')
    plt.xlabel('Time of day (24 hour format)')
    plt.ylabel('Number of vehicles')
-   #plt.legend(bbox_to_anchor=(1,1), loc="upper left")
-   plt.legend()
+   plt.legend(bbox_to_anchor=(1,1), loc="upper left")
    
    st.pyplot()
    
