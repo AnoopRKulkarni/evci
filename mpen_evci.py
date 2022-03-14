@@ -81,6 +81,5 @@ if st.session_state.loggedin:
             PAGES[sel_category].app(sites[selection])
 
 else:
-   #st.markdown('[Login to EVCI](http://localhost:8080)')
    if st.button('Log In'):
-      webbrowser.open('http:/localhost:8080')
+      webbrowser.open('http:/tool.evci.in:8080')
