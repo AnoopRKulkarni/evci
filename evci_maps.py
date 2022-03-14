@@ -22,11 +22,11 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 
 def app(site):
     #@title Define file paths
-    cookie_manager = stx.CookieManager()
+    cookie_manager = stx.CookieManager(key='maps')
     if cookie_manager.get(cookie='mpen_evci_user') != None:
-       username = cookies.get(cookie='mpen_evci_user')
+       username = cookie_manager.get(cookie='mpen_evci_user')
 
-    INPUT_PATH = 'input/'+username+'/'+site['prefix']+'/'
+    INPUT_PATH = 'input/'+site['prefix']+'/'
     OUTPUT_PATH = 'output/'+username+'/'+site['prefix']+'/'
 
     if not os.path.exists(INPUT_PATH):

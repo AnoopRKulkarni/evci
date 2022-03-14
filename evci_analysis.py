@@ -32,12 +32,12 @@ def app(site):
    global backoff_factor
    global initial_output_df, final_output_df
 
-   cookie_manager = stx.CookieManager()
+   cookie_manager = stx.CookieManager(key='analysis')
    if cookie_manager.get(cookie='mpen_evci_user') != None:
       username = cookies.get(cookie='mpen_evci_user')
 
    #@title Define file paths
-   INPUT_PATH = 'input/'+username+'/'+site['prefix']+'/'
+   INPUT_PATH = 'input/'+site['prefix']+'/'
    OUTPUT_PATH = 'output/'+username+'/'+site['prefix']+'/'
     
    if not os.path.exists(INPUT_PATH):
