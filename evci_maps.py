@@ -16,18 +16,13 @@ import os
 import pandas as pd
 
 import streamlit as st
-import extra_streamlit_components as stx
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 def app(site):
     #@title Define file paths
-    cookie_manager = stx.CookieManager(key='maps')
-    if cookie_manager.get(cookie='mpen_evci_user') != None:
-       username = cookie_manager.get(cookie='mpen_evci_user')
-
     INPUT_PATH = 'input/'+site['prefix']+'/'
-    OUTPUT_PATH = 'output/'+username+'/'+site['prefix']+'/'
+    OUTPUT_PATH = 'output/'+site['prefix']+'/'
 
     if not os.path.exists(INPUT_PATH):
        os.makedirs(INPUT_PATH)
