@@ -10,10 +10,10 @@ import jwt
 import requests
 import time
 
-#FLASK_APP = 'localhost:8080'
-FLASK_APP = 'tool.evci.in:8080'
-#STL_APP = 'http://localhost:8501'
-STL_APP = 'http://tool.evci.in:8501'
+FLASK_APP = 'localhost:8080'
+#FLASK_APP = 'tool.evci.in:8080'
+STL_APP = 'http://localhost:8501'
+#STL_APP = 'http://tool.evci.in:8501'
 VERIFY_JWT = 'https://sso.mpensystems.com/verifytoken?ssoToken='
 SSO = 'https://sso.mpensystems.com/login?serviceURL=http://'+FLASK_APP+'/callback_url'
 HDRS = {'Authorization': 'Bearer MPEN-l1Q7zkOL59cRqWBkQ12ZiGVW2DBL'}

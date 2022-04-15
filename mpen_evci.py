@@ -12,6 +12,11 @@ import webbrowser
 import requests
 import toml
 
+FLASK_APP = 'localhost:8080'
+#FLASK_APP = 'tool.evci.in:8080'
+STL_APP = 'http://localhost:8501'
+#STL_APP = 'http://tool.evci.in:8501'
+
 sites = {}
 sites['PCMC'] = {'prefix':'pcmc', 'file': 'PCMC Mastersheet_3Nov21.xlsx', 'gis':'PCMC_Wards'}
 sites['Pune'] = {'prefix':'pmc', 'file': 'Pune site mastersheet_3Nov21.xlsx', 'gis':'PMC'}
@@ -82,4 +87,4 @@ if st.session_state.loggedin:
 
 else:
    if st.button('Log In'):
-      webbrowser.open('http:/tool.evci.in:8080')
+      webbrowser.open(FLASK_APP)
