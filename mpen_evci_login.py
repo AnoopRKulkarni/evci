@@ -7,7 +7,15 @@
 import evci_maps
 import evci_analysis
 import streamlit as st
+import extra_streamlit_components as stx
+import webbrowser
+import requests
 import toml
+
+FLASK_APP = 'localhost:8080'
+#FLASK_APP = 'tool.evci.in:8080'
+STL_APP = 'http://localhost:8501'
+#STL_APP = 'http://tool.evci.in:8501'
 
 sites = {}
 sites['PCMC'] = {'prefix':'pcmc', 'file': 'PCMC Mastersheet_3Nov21.xlsx', 'gis':'PCMC_Wards'}
@@ -38,13 +46,27 @@ with header:
 
 st.title("EVCI Site Planner")
 
-if 'explored' not in st.session_state:
-   st.session_state.explored = False
-
 lounge = st.empty()
 with lounge.container():
-      st.image ('res/evci.jpg')
+   st.image ('res/evci.jpg')
 
+if 'loggedin' not in st.session_state:
+   st.session_state.loggedin = False
+if 'explored' not in st.session_state:
+   st.session_state.explored = False
+   
+cookie_manager = stx.CookieManager()
+
+if cookie_manager.get(cookie='mpen_evci_user') != None:
+   st.session_state.loggedin = True
+
+if st.session_state.loggedin:
+   
+   if st.sidebar.button('Log Out'):
+      st.session_state.loggedin = False
+      st.session_state.explored = False
+      cookie_manager.delete(cookie='mpen_evci_user')
+   else:
       st.sidebar.title('Site Selection')
       selection = st.sidebar.radio("Select Site", sites.keys())
    
@@ -62,3 +84,7 @@ with lounge.container():
          lounge.empty()
          with lounge.container():
             PAGES[sel_category].app(sites[selection])
+
+else:
+   if st.button('Log In'):
+      webbrowser.open(FLASK_APP)
